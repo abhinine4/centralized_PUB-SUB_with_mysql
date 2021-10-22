@@ -13,7 +13,7 @@ class Events:
             update = response.text
             conn = sqlite3.connect('pubsub.db')
             c = conn.cursor()
-            c.execute("UPDATE eventBroker set eventData = ? WHERE eid = ?",(update,1))
+            c.execute("UPDATE eventBroker set eventData = ? WHERE eid = ?", (update, 1))
             conn.commit()
             conn.close()
         elif eid == 2:

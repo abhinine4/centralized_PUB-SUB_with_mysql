@@ -2,7 +2,7 @@ import sqlite3
 
 conn = sqlite3.connect('pubsub.db')
 c = conn.cursor()
-
+#
 # c.execute("DROP table eventBroker")
 # c.execute("DROP table publisher")
 # c.execute("DROP table subscriber")
@@ -19,14 +19,14 @@ c = conn.cursor()
 # c.execute("""CREATE TABLE IF NOT EXISTS publisher(
 #         pid TEXT,
 #         eid INTEGER,
-#         advertisement INTEGER DEFAULT 0)
+#         advertisement INTEGER)
 #         """)
 #
 # c.execute("""CREATE TABLE IF NOT EXISTS subscriber(
 #         sid TEXT,
 #         eid INTEGER,
-#         subscription INTEGER DEFAULT 0,
-#         notification INTEGER DEFAULT 0)
+#         subscription INTEGER,
+#         notification INTEGER)
 #         """)
 
 
@@ -47,17 +47,19 @@ c = conn.cursor()
 # sid1 = 'aaaa'
 # sid2 = 'bbbb'
 # sid3 = 'cccc'
-# eid1 = '1'
+# eid1 = 1
 # eid2 = 2
-# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)",(sid1,1,0,0))
-# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)",(sid2,2,0,0))
-# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)",(sid3,2,0,0))
-# c.execute("UPDATE subscriber SET notification = 1 WHERE eid = ?",str(eid2))
-# c.execute("SELECT * FROM subscriber WHERE sid = ? and eid= ? ",(sid1,eid1))
-# print(c.fetchall())
-# c.execute("SELECT * FROM subscriber")
+# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)", (sid1, 1, 0, 0))
+# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)", (sid2, 2, 0, 0))
+# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)", (sid2, 1, 0, 0))
+#
+# c.execute("UPDATE subscriber SET notification = 1 WHERE eid = ?", str(eid2))
+# c.execute("UPDATE subscriber SET notification = 1 WHERE eid = ?", str(eid1))
+# c.execute("SELECT DISTINCT * FROM subscriber WHERE sid = ? AND notification = 1", (sid2,))
 # print(c.fetchall())
 
-#######################################################################
 conn.commit()
 conn.close()
+
+
+#######################################################################
