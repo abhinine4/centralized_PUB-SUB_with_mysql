@@ -1,0 +1,34 @@
+
+<h ><strong>SUBSCRIBER PAGE</strong></h>
+<br>
+<body>
+<form action="/subscribers" method="POST" name="manage">
+  <p><i>Edit subscription : </i></p>
+  Subscriber ID : <input type="text" name="subscriberid">
+  @
+  <select name = "dropdown">
+    <option value = "1">Topic name 1</option>
+    <option value = "2">Topic name 2</option>
+    <option value = "3">Topic name 3</option>
+  </select>
+  <input type = "radio" name = "subscription" value = "subscribe">Subscribe
+  <input type = "radio" name = "subscription" value = "unsubscribe">Unsubscribe
+   =
+  <input type = "submit" name = "done" value = "done" />
+</form>
+<br>
+<form name="viewnew">
+  <p><i>View latest : </i></p>
+  Subscriber ID : <input type="text" name="subscriberid">
+  @
+  <select name = "dropdown">
+    <option value = "1">Topic name 1</option>
+    <option value = "2">Topic name 2</option>
+    <option value = "3">Topic name 3</option>
+  </select>
+  <input type = "submit" name = "view" value = "view"/>
+</form>
+<br>
+<form action="/">
+    <button class="button" >Log out</button>
+</form>
