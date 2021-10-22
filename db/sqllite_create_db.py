@@ -12,29 +12,24 @@ c = conn.cursor()
 #         eventData TEXT)
 #         """)
 #
-# c.execute("INSERT INTO eventBroker VALUES(1,'')")
-# c.execute("INSERT INTO eventBroker VALUES(2,'')")
-# c.execute("INSERT INTO eventBroker VALUES(3,'')")
+# c.execute("INSERT INTO eventBroker VALUES(1,'Nothing new to see. Please publish!')")
+# c.execute("INSERT INTO eventBroker VALUES(2,'Nothing new to see. Please publish!')")
+# c.execute("INSERT INTO eventBroker VALUES(3,'Nothing new to see. Please publish!')")
 #
 # c.execute("""CREATE TABLE IF NOT EXISTS publisher(
 #         pid TEXT,
 #         eid INTEGER,
-#         advertisement INTEGER,
-#         CONSTRAINT publisher_c UNIQUE (pid,eid))
+#         advertisement INTEGER DEFAULT 0)
 #         """)
 #
 # c.execute("""CREATE TABLE IF NOT EXISTS subscriber(
 #         sid TEXT,
 #         eid INTEGER,
-#         subscription INTEGER,
-#         notification INTEGER,
-#         CONSTRAINT subscriber_c UNIQUE (sid,eid))
+#         subscription INTEGER DEFAULT 0,
+#         notification INTEGER DEFAULT 0)
 #         """)
-# ev1 = 'something'
 
 
-conn.commit()
-conn.close()
 ############################################################################
 # queries
 
@@ -42,44 +37,27 @@ conn.close()
 # c.execute("SELECT * from eventBroker")
 # print(c.fetchall())
 
-# evid = 1
-# ev1 = 'something'
-# ev2 = 'something else'
-# ev3 = 'nothing here'
-#
-# # for publisher to publish
-# c.execute("UPDATE topics set event_data = ? WHERE eid = ?", (ev1, 1))
-# c.execute("UPDATE topics set event_data = ? WHERE eid = ?",(ev2,2))
-# c.execute("UPDATE topics set event_data = ? WHERE eid = ?",(ev3,3))
-#
-# # for subscriber to view/notify
-
+# pid = 'asdasd'
+# eid = 3
+# c.execute("INSERT INTO publisher VALUES(?,?,?)",(pid,eid,1))
+# c.execute("UPDATE publisher SET advertisement = 0 WHERE pid = ? AND eid = ?", (pid, eid))
+# c.execute("SELECT * FROM publisher")
 # print(c.fetchall())
 
-
-# pid = 'psaket'
-# c.execute("INSERT INTO advertisement VALUES(?,?,?,?)",(pid,0,0,0))
-# pid = 'pabhi'
-# c.execute("INSERT INTO advertisement VALUES(?,?,?,?)",(pid,0,0,0))
-# c.execute("SELECT * FROM advertisement ")
+# sid1 = 'aaaa'
+# sid2 = 'bbbb'
+# sid3 = 'cccc'
+# eid1 = '1'
+# eid2 = 2
+# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)",(sid1,1,0,0))
+# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)",(sid2,2,0,0))
+# c.execute("INSERT INTO SUBSCRIBER VALUES(?,?,?,?)",(sid3,2,0,0))
+# c.execute("UPDATE subscriber SET notification = 1 WHERE eid = ?",str(eid2))
+# c.execute("SELECT * FROM subscriber WHERE sid = ? and eid= ? ",(sid1,eid1))
+# print(c.fetchall())
+# c.execute("SELECT * FROM subscriber")
 # print(c.fetchall())
 
 #######################################################################
-
-#
-# sid = 'ssaket'
-# c.execute("INSERT INTO subscription VALUES(?,?,?,?)",(sid,0,0,0))
-# sid = 'sabhi'
-# c.execute("INSERT INTO subscription VALUES(?,?,?,?)",(sid,0,0,0))
-# c.execute("SELECT * FROM subscription ")
-# print(c.fetchall())
-
-# c.execute("UPDATE advertisement SET ad1 = 1 WHERE pid ='psaket'")
-# c.execute("SELECT * FROM advertisement ")
-# print(c.fetchall())
-#
-# c.execute("UPDATE subscription SET ev2 = 1 WHERE sid ='sabhi'")
-# c.execute("SELECT * FROM subscription ")
-# print(c.fetchall())
-#
-
+conn.commit()
+conn.close()
