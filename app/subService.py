@@ -36,7 +36,7 @@ class SubService:
         c.execute("SELECT * FROM subscriber WHERE sid = ? AND notification = 1", (sid,))
         val = c.fetchall()
         if val:
-            message = "You new updates !"
+            message = "You have new updates !"
         c.execute("UPDATE subscriber SET notification = 0 WHERE sid = ? AND eid = ?", (sid, eid))
         conn.commit()
         conn.close()
