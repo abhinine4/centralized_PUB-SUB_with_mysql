@@ -19,14 +19,14 @@ c = conn.cursor()
 # c.execute("""CREATE TABLE IF NOT EXISTS publisher(
 #         pid TEXT,
 #         eid INTEGER,
-#         advertisement INTEGER)
+#         advertisement INTEGER DEFAULT 0)
 #         """)
 #
 # c.execute("""CREATE TABLE IF NOT EXISTS subscriber(
 #         sid TEXT,
 #         eid INTEGER,
-#         subscription INTEGER,
-#         notification INTEGER)
+#         subscription INTEGER DEFAULT 0,
+#         notification INTEGER DEFAULT 0)
 #         """)
 
 

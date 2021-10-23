@@ -4,7 +4,6 @@ from pubService import PubService
 from subService import SubService
 
 from flask import Flask, render_template, request, redirect
-import sqlite3
 
 app = Flask(__name__)
 
@@ -28,12 +27,37 @@ def index():
 
 
 @app.route('/publishers', methods=['GET', 'POST'])
-def publishers():
+def frompublishers():
+    if request.method == 'POST':
+        pid = request.form['publisherid']
+        eid = int(request.form['dropdown'])
+        if request.form['submit'] == 'advertise':
+            PubService.advertise(pid,eid)
+        elif request.form['submit'] == 'deadvertise':
+            PubService.deadvertise(pid,eid)
+        elif request.form['submit'] == 'publish':
+            PubService.publish(pid, eid)
+            m = PubService.viewAd(pid,eid)
+            return render_template('index.html',msg=m)
     return render_template('pub.html')
 
 
 @app.route('/subscribers', methods=['GET', 'POST'])
-def subscribers():
+def fromsubscribers():
+    if request.method == 'POST':
+        sid = request.form['subscriberid']
+        eid = int(request.form['dropdown'])
+        if request.form['submit'] == 'subscribe':
+            SubService.subscribe(sid,eid)
+        elif request.form['submit'] == 'unsubscribe':
+            SubService.unsubscribe(sid,eid)
+        elif request.form['submit'] == 'updates':
+            SubService.view(eid)
+            updates = SubService.view(eid)
+            return render_template('sub.html', u=updates)
+        elif request.form['submit'] == 'notifications':
+            m = SubService.viewNotification(sid, eid)
+            return render_template('sub.html',msg=m)
     return render_template('sub.html')
 
 

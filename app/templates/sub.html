@@ -1,9 +1,13 @@
-
 <h ><strong>SUBSCRIBER PAGE</strong></h>
 <br>
+<!--<form action="/subscribers">-->
+<!--  <p><i>View notifications : </i></p>-->
+<!--  Subscriber ID : <input type="text" name="subscriberid">-->
+<!--  <input type = "submit" name = "notifications" value = "notifications"/>-->
+<!--</form>-->
 <body>
-<form action="/subscribers" method="POST" name="manage">
-  <p><i>Edit subscription : </i></p>
+<form action="/subscribers" method="POST">
+  <p><i>Subscribe or View : </i></p>
   Subscriber ID : <input type="text" name="subscriberid">
   @
   <select name = "dropdown">
@@ -11,25 +15,24 @@
     <option value = "2">Topic name 2</option>
     <option value = "3">Topic name 3</option>
   </select>
-  <input type = "radio" name = "subscription" value = "subscribe">Subscribe
-  <input type = "radio" name = "subscription" value = "unsubscribe" checked>Unsubscribe
-   =
-  <input type = "submit" name = "done" value = "add/edit" />
+  <input type = "submit" name = "submit" value = "subscribe">
+  OR
+  <input type = "submit" name = "submit" value = "unsubscribe">
+   ||
+  <input type = "submit" name = "submit" value="updates">
+  OR
+  <input type = "submit" name = "submit" value="notifications">
 </form>
+
 <br>
-<form action="/subscribers" method="POST" name="viewnew">
-  <p><i>View latest : </i></p>
-  Subscriber ID : <input type="text" name="subscriberid">
-  @
-  <select name = "dropdown">
-    <option value = "1">Topic name 1</option>
-    <option value = "2">Topic name 2</option>
-    <option value = "3">Topic name 3</option>
-  </select>
-  <input type = "submit" name = "view" value = "notifications"/>
-  <input type = "submit" name = "view" value = "view"/>
-</form>
+<p><strong>{{msg}}</strong></p>
+
+<p><strong>{{u}}</strong></p>
+
 <br>
 <form action="/">
     <button class="button" >Log out</button>
 </form>
+
+
+

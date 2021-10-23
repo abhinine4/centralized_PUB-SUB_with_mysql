@@ -1,8 +1,8 @@
 <h ><strong>PUBLISHER PAGE</strong></h>
 <br>
 <body>
-<form action="/publishers" method="POST" name="manage">
-  <p><i>Edit advertisement : </i></p>
+<form action="/publishers" method="POST">
+  <p><i>Edit or Publish : </i></p>
   Publisher ID : <input type="text" name="publisherid">
   @
   <select name = "dropdown">
@@ -10,24 +10,16 @@
     <option value = "2">Topic name 2</option>
     <option value = "3">Topic name 3</option>
   </select>
-  <input type = "radio" name = "advertisement" value = "advertise">Advertise
-  <input type = "radio" name = "advertisement" value = "deadvertise" checked >Deadvertise
-   =
-  <input type = "submit" name = "done" value = "add/edit" />
+  <input type = "submit" name = "submit" value = "advertise">
+  OR
+  <input type = "submit" name = "submit" value = "deadvertise">
+   &
+  <input type = "submit" name = "submit" value = "publish" />
 </form>
+
 <br>
-<form action="/publishers" method="POST" name="publishinew">
-  <p><i>Publish new information : </i></p>
-  Publisher ID : <input type="text" name="publisherid">
-  @
-  <select name = "dropdown">
-    <option value = "1">Topic name 1</option>
-    <option value = "2">Topic name 2</option>
-    <option value = "3">Topic name 3</option>
-  </select>
-  <input type = "submit" name = "publish" value = "publish"/>
-</form>
 <br>
 <form action="/">
     <button class="button" >Log out</button>
 </form>
+

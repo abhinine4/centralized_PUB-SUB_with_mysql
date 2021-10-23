@@ -40,6 +40,24 @@ class PubService:
         conn.close()
         return
 
+    def viewAd(pid,eid):
+        m = 'No ads to show :'
+        conn = sqlite3.connect('pubsub.db')
+        c = conn.cursor()
+        c.execute("SELECT pid FROM publisher WHERE pid = ? AND eid = ? AND advertisement = 1", (pid, eid))
+        val = c.fetchone()
+        if val:
+            if eid == 1:
+                topic = 'topic 1'
+            elif eid == 2:
+                topic = 'topic 2'
+            elif eid == 3:
+                topic = 'topic 3'
+            m = ('Exciting new jokes published by ' + pid + '@' + topic)
+        conn.commit()
+        conn.close()
+        return m
+
     def publish(pid, eid):
         conn = sqlite3.connect('pubsub.db')
         c = conn.cursor()

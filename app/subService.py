@@ -1,11 +1,12 @@
 import sqlite3
 
+
 class SubService:
 
-    def subscribe(sid,eid):
+    def subscribe(sid, eid):
         conn = sqlite3.connect('pubsub.db')
         c = conn.cursor()
-        c.execute("SELECT sid FROM publisher WHERE sid = ? AND eid = ?", (sid, eid))
+        c.execute("SELECT sid FROM subscriber WHERE sid = ? AND eid = ?", (sid, eid))
         val = c.fetchone()
         if val:
             c.execute("UPDATE subscriber SET subscription = 1 WHERE sid = ? AND eid = ?", (sid, eid))
@@ -15,10 +16,10 @@ class SubService:
         conn.close()
         return
 
-    def unsubscribe(sid,eid):
+    def unsubscribe(sid, eid):
         conn = sqlite3.connect('pubsub.db')
         c = conn.cursor()
-        c.execute("SELECT sid FROM publisher WHERE sid = ? AND eid = ?", (sid, eid))
+        c.execute("SELECT sid FROM subscriber WHERE sid = ? AND eid = ?", (sid, eid))
         val = c.fetchone()
         if val:
             c.execute("UPDATE subscriber SET subscription = 0 WHERE sid = ? AND eid = ?", (sid, eid))
@@ -28,13 +29,15 @@ class SubService:
         conn.close()
         return
 
-    def viewNotification(sid):
+    def viewNotification(sid,eid):
+        message = 'No new updates !'
         conn = sqlite3.connect('pubsub.db')
         c = conn.cursor()
-        c.execute("SELECT * FROM subscriber WHERE sid = ? AND notification = 1",(sid,))
+        c.execute("SELECT * FROM subscriber WHERE sid = ? AND notification = 1", (sid,))
         val = c.fetchall()
         if val:
             message = "You new updates !"
+        c.execute("UPDATE subscriber SET notification = 0 WHERE sid = ? AND eid = ?", (sid, eid))
         conn.commit()
         conn.close()
         return message
@@ -42,9 +45,8 @@ class SubService:
     def view(eid):
         conn = sqlite3.connect('pubsub.db')
         c = conn.cursor()
-        c.execute("SELECT eventData FROM eventBroker WHERE eid = ?",str(eid))
+        c.execute("SELECT eventData FROM eventBroker WHERE eid = ?", str(eid))
         updates = c.fetchone()
         conn.commit()
         conn.close()
         return updates
-
