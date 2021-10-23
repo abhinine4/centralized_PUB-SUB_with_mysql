@@ -47,6 +47,7 @@ class SubService:
         c = conn.cursor()
         c.execute("SELECT eventData FROM eventBroker WHERE eid = ?", str(eid))
         updates = c.fetchone()
+        updates = updates[0]
         conn.commit()
         conn.close()
         return updates
