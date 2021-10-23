@@ -52,8 +52,7 @@ def fromsubscribers():
         elif request.form['submit'] == 'unsubscribe':
             SubService.unsubscribe(sid,eid)
         elif request.form['submit'] == 'updates':
-            SubService.view(eid)
-            updates = SubService.view(eid)
+            updates = SubService.view(sid,eid)
             return render_template('sub.html', u=updates)
         elif request.form['submit'] == 'notifications':
             m = SubService.viewNotification(sid, eid)
@@ -62,4 +61,4 @@ def fromsubscribers():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5000)
