@@ -48,12 +48,12 @@ class PubService:
         val = c.fetchone()
         if val:
             if eid == 1:
-                topic = 'topic 1'
+                topic = 'Dad Jokes'
             elif eid == 2:
-                topic = 'topic 2'
+                topic = 'Random Advice'
             elif eid == 3:
-                topic = 'topic 3'
-            m = ('Exciting new jokes published by ' + pid + '@' + topic)
+                topic = 'Inspirational Quotes'
+            m = ('Exciting new ' + topic + ' published by ' + pid)
         conn.commit()
         conn.close()
         return m
